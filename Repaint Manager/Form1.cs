@@ -88,7 +88,7 @@ namespace Repaint_Manager
 
             // Find the  files we need
             var textureDir = getTextureDir(tmpAircraftDir);
-            // var readme = getReadme(tmpAircraftDir);
+            var readme = getReadme(tmpAircraftDir);
         }
 
         private string getTextureDir(string aircraftBaseDir)
@@ -98,9 +98,18 @@ namespace Repaint_Manager
             return textureDir;
         }
 
-        private void getReadme(string tmpAircraftDir)
+        private string getReadme(string tmpAircraftDir)
         {
-            //Directory.EnumerateFiles(tmpAircraftDir, @"readme", SearchOption.AllDirectories);
+            var files = Directory.EnumerateFiles(tmpAircraftDir, @"readme.*", SearchOption.AllDirectories);
+            var readmePath = "";
+
+            foreach (string file in files)
+            {
+                readmePath = file;
+                break;
+            }
+
+            return readmePath;
         }
 
         private string recursiveDirSearch(string path, string dirName)
